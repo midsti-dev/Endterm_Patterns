@@ -13,6 +13,8 @@ public class Main {
     public static void main(String[] args) throws AdminAuthenticationException, InterruptedException {
         console.clear();
         System.out.print("1:Клиент \n2:Админ \nВаш выбор: ");
+        boolean isExit = false;
+        while(!isExit)
         switch (sc.nextInt()) {
             case 1:
                 console.clear();
@@ -24,6 +26,9 @@ public class Main {
                 console.clear();
                 System.out.println("");
                 AdminMenu();
+                break;
+            default:
+                isExit = true;
                 break;
         }
         
