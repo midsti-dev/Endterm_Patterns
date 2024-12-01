@@ -23,7 +23,7 @@ class PizzaForAdmin extends Pizza{
     @Override
     public String toString() {
         return  "Пицца: " + this.getName()
-                + "Доп. ингридиенты: " + this.getDopIng() + "\n";
+                + " Доп. ингридиенты: " + this.getDopIng() + "\n";
     }
 }
 class MargheritaPizza extends Pizza {
@@ -47,7 +47,7 @@ class MargheritaPizza extends Pizza {
     @Override
     public String toString() {
         return  "Пицца: " + this.getName()
-                + "Доп. ингридиенты: " + this.getDopIng() + "\n";
+                + " Доп. ингридиенты: " + this.getDopIng() + "\n";
     }
 }
 
@@ -73,7 +73,7 @@ class PepperoniPizza extends Pizza {
     @Override
     public String toString() {
         return  "Пицца: " + this.getName()
-                + "Доп. ингридиенты: " + this.getDopIng() + "\n";
+                + " Доп. ингридиенты: " + this.getDopIng() + "\n";
     }
 
 }
@@ -101,7 +101,7 @@ class FourSeasonsPizza extends Pizza {
     @Override
     public String toString() {
         return  "Пицца: " + this.getName()
-                + "Доп. ингридиенты: " + this.getDopIng() + "\n";
+                + " Доп. ингридиенты: " + this.getDopIng() + "\n";
     }
 }
 
@@ -127,7 +127,7 @@ class CaesarPizza extends Pizza {
     @Override
     public String toString() {
         return  "Пицца: " + this.getName()
-                + "Доп. ингридиенты: " + this.getDopIng() + "\n";
+                + " Доп. ингридиенты: " + this.getDopIng() + "\n";
     }
 }
 
@@ -153,7 +153,7 @@ class FourCheesePizza extends Pizza {
     @Override
     public String toString() {
         return  "Пицца: " + this.getName()
-                + "Доп. ингридиенты: " + this.getDopIng() + "\n";
+                + " Доп. ингридиенты: " + this.getDopIng() + "\n";
     }
 }
 

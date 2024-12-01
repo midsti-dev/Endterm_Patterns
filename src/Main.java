@@ -12,7 +12,7 @@ public class Main {
     static Order order;
     public static void main(String[] args) throws AdminAuthenticationException, InterruptedException {
         console.clear();
-        System.out.print("1:Customer\n2:Admin\nWhat log in type: ");
+        System.out.print("1:Клиент \n2:Админ \nВаш выбор: ");
         switch (sc.nextInt()) {
             case 1:
                 console.clear();
@@ -31,7 +31,7 @@ public class Main {
     static void CustomerMenu(){
         console.clear();
         while(true){
-            System.out.println("1)Показать меню пицц\n2)Заказать пиццу\n3)Показать заказ\n4)Удалить из заказа\n5)Завершить заказ");
+            System.out.println("1)Показать меню\n2)Заказать пиццу\n3)Показать заказ\n4)Удалить из заказа\n5)Завершить заказ\n6)Подвердить и выйти");
             switch (sc.nextInt()) {
                 case 1:
                     ShowMenuPizza();
@@ -43,11 +43,17 @@ public class Main {
                     ShowOrder();
                     break;
                 case 4:
-                    //DeleteFromOrder()
+                    DeleteFromOrder();
                     break;
                 case 5:
                     FinishOrder();
                     break;
+                case 6:
+                    console.clear();
+                    System.out.println("Спасибо за визит! До свидания!");
+                    return;
+                default:
+                    System.out.println("Неверный выбор! Попробуйте снова.");
             }
         }
     }
@@ -61,7 +67,7 @@ public class Main {
     static void ShowMenuPizza(){
         console.clear();
         MenuIterator iterator = new PizzaMenuIterator(menu);
-        System.out.println("Pizzas:");
+        System.out.println("Пиццы :");
         int i = 1;
         while(iterator.hasNext()){
             System.out.println(i++ + "." + iterator.current().getName());
@@ -74,36 +80,67 @@ public class Main {
         for(String doping : podMenu.getMenu()){
             System.out.println(i++ + "." + doping);
         }
-        System.out.println(i + ".Не надо");
+        
     }
-    static void OrderPizza(){
+    
+    static void OrderPizza() {
         console.clear();
         ShowMenuPizza();
-        System.out.println("Какую пиццу заказать: ");
+        System.out.println("Введите номер пиццы, которую хотите заказать: ");
         int selectPiz = sc.nextInt();
-        ShowDopIngMenu();
-        System.out.println("Добавить доп. ингридиент:");
-        int selectDop = sc.nextInt();
-        if(selectPiz > 0 && selectPiz <= menu.getSize()){
-            if(selectDop > 0 && selectDop < podMenu.getSize()){
-                order = new OrderBuilder()  .addPizza(
-                                            PizzaFactory.createPizzaWithDopIng
-                                            (menu.getMenu().get(selectPiz).getName(),
-                                             podMenu.getMenu().get(selectDop)))
-                                            .build();
-            }
-            else{
-                throw new IllegalArgumentException("Не правильный выбор!");
-            }
+        sc.nextLine(); // Очистка после ввода номера
+    
+        if (selectPiz <= 0 || selectPiz > menu.getSize()) {
+            throw new IllegalArgumentException("Неправильный выбор номера пиццы!");
         }
-        else{
-            order = new OrderBuilder()
-                        .addPizza(menu.getMenu().get(selectPiz))
-                        .build();
+    
+        System.out.println("Вы выбрали: " + menu.getMenu().get(selectPiz - 1).getName());
+        System.out.println("Хотите добавить дополнительные ингредиенты?\n1) Да\n2) Нет");
+        int addIngChoice = sc.nextInt();
+        sc.nextLine(); // Очистка после ввода выбора
+    
+        Pizza orderedPizza;
+    
+        if (addIngChoice == 1) {
+            System.out.println("Выберите дополнительный ингредиент из списка:");
+            ShowDopIngMenu(); // Показываем список доступных ингредиентов
+            System.out.println((podMenu.getSize() + 1) + ".Не надо");
+            System.out.println("Введите номер ингредиента: ");
+            int dopIngIndex = sc.nextInt();
+            sc.nextLine(); // Очистка после ввода номера
+    
+            if (dopIngIndex > 0 && dopIngIndex <= podMenu.getSize()) {
+                String additionalIngredient = podMenu.getMenu().get(dopIngIndex - 1);
+                orderedPizza = PizzaFactory.createPizzaWithDopIng(
+                        menu.getMenu().get(selectPiz - 1).getName(), additionalIngredient);
+            } else if (dopIngIndex == podMenu.getSize() + 1) {
+                // Пользователь выбрал "Не надо"
+                orderedPizza = menu.getMenu().get(selectPiz - 1);
+            } else {
+                throw new IllegalArgumentException("Неправильный выбор ингредиента!");
+            }
+        } else if (addIngChoice == 2) {
+            orderedPizza = menu.getMenu().get(selectPiz - 1);
+        } else {
+            throw new IllegalArgumentException("Неправильный выбор!");
         }
+    
+        if (order == null) {
+            order = new OrderBuilder().addPizza(orderedPizza).build();
+        } else {
+            order.addPizza(orderedPizza);
+        }
+    
         console.clear();
-        return;
+        System.out.println("Пицца добавлена в заказ!");
     }
+    
+    
+    
+    
+    
+    
+    
     static void ShowOrder(){
         console.clear();
         if(order == null){
@@ -144,5 +181,42 @@ public class Main {
         console.clear();
         ShowOrder();
     }
+
+    static void DeleteFromOrder() {
+        try {
+            console.clear();
+            
+            if (order == null || order.getPizzas().isEmpty()) {
+                System.out.println("Ваш заказ пуст! Нечего удалять.");
+                return;
+            }
+    
+            System.out.println("Ваш текущий заказ:");
+            List<Pizza> pizzas = order.getPizzas();
+            for (int i = 0; i < pizzas.size(); i++) {
+                System.out.println((i + 1) + ") " + pizzas.get(i).toString());
+            }
+    
+            System.out.println("Введите номер пиццы, которую хотите удалить (или 0 для выхода):");
+            int choice = sc.nextInt();
+    
+            if (choice == 0) {
+                return; // Выход из удаления
+            }
+    
+            if (choice > 0 && choice <= pizzas.size()) {
+                pizzas.remove(choice - 1); // Удаляем выбранную пиццу
+                console.clear();
+                System.out.println("Пицца успешно удалена из заказа!");
+            } else {
+                System.out.println("Неверный выбор! Попробуйте снова.");
+            }
+    
+        } catch (InputMismatchException e) {
+            System.out.println("Ошибка ввода! Введите числовое значение.");
+            sc.nextLine(); // Очищаем буфер ввода
+        }
+    }
+    
 
 }
