@@ -105,6 +105,7 @@ public class Main {
         return;
     }
     static void ShowOrder(){
+        console.clear();
         if(order == null){
             System.out.println("Ваш заказ пуст!");
             return;
