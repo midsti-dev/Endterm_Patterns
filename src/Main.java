@@ -65,6 +65,7 @@ public class Main {
     }
     /**
      *                  Handles admin functionalities by authenticating and allowing management of the menu.
+     *                                          Singleton Pattern Used
      */
     static void AdminMenu() throws AdminAuthenticationException, InterruptedException{
         console.clear();
@@ -72,7 +73,7 @@ public class Main {
         Admin.adminMenu(menu, podMenu);
     }
     /**
-     *                                  Displays the list of pizzas in the menu.
+     *                                  Displays the list of pizzas in the menu.(Iterator Pattern used)
      */
     static void ShowMenuPizza(){
         console.clear();
@@ -162,7 +163,7 @@ public class Main {
 
 
     /**
-     *                  Finalizes the order, allowing the customer to choose between pickup or delivery.
+     *                  Finalizes the order, allowing the customer to choose between pickup or delivery. Used Decoretor Pattern
      */
     static void FinishOrder(){
         console.clear();
@@ -184,6 +185,7 @@ public class Main {
             String delivery;
             delivery = "Доставка: ";
             System.out.print("Адрес доставки: ");
+            sc.nextLine();
             delivery += sc.nextLine();
             order = new OrderDecorator(order)
                         .setDeliveryType(delivery).decorate();
@@ -229,7 +231,7 @@ public class Main {
     
         } catch (InputMismatchException e) {
             System.out.println("Ошибка ввода! Введите числовое значение.");
-            sc.nextLine(); // Очищаем буфер ввода
+            sc.nextLine();
         }
     }
     
