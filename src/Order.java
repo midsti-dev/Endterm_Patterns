@@ -13,10 +13,14 @@ class Order {
         this.deliveryType = deliveryType;
     }
 
+    public List<Pizza> getPizzas() { // Новый метод для получения списка пицц
+        return pizzas;
+    }
+
     public void showOrder() {
         System.out.println("Ваш заказ:");
         for (Pizza pizza : pizzas) {
-            pizza.toString();
+            System.out.println(pizza.toString());
         }
         System.out.println("Тип доставки:" + deliveryType);
     }

@@ -6,6 +6,13 @@
             "name": "Main",
             "request": "launch",
             "mainClass": "Main",
+            "projectName": "Endterm_Patterns-1_8c77a537"
+        },
+        {
+            "type": "java",
+            "name": "Main",
+            "request": "launch",
+            "mainClass": "Main",
             "projectName": "Endterm_Patterns_5fc30fb5",
             "console": "externalTerminal"
         },
