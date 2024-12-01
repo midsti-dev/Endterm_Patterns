@@ -80,7 +80,6 @@ public class Main {
         for(String doping : podMenu.getMenu()){
             System.out.println(i++ + "." + doping);
         }
-        
     }
     
     static void OrderPizza() {
@@ -88,7 +87,7 @@ public class Main {
         ShowMenuPizza();
         System.out.println("Введите номер пиццы, которую хотите заказать: ");
         int selectPiz = sc.nextInt();
-        sc.nextLine(); // Очистка после ввода номера
+        console.clear();
     
         if (selectPiz <= 0 || selectPiz > menu.getSize()) {
             throw new IllegalArgumentException("Неправильный выбор номера пиццы!");
@@ -97,24 +96,23 @@ public class Main {
         System.out.println("Вы выбрали: " + menu.getMenu().get(selectPiz - 1).getName());
         System.out.println("Хотите добавить дополнительные ингредиенты?\n1) Да\n2) Нет");
         int addIngChoice = sc.nextInt();
-        sc.nextLine(); // Очистка после ввода выбора
+        console.clear();
     
         Pizza orderedPizza;
     
         if (addIngChoice == 1) {
             System.out.println("Выберите дополнительный ингредиент из списка:");
-            ShowDopIngMenu(); // Показываем список доступных ингредиентов
+            ShowDopIngMenu();
             System.out.println((podMenu.getSize() + 1) + ".Не надо");
             System.out.println("Введите номер ингредиента: ");
             int dopIngIndex = sc.nextInt();
-            sc.nextLine(); // Очистка после ввода номера
+            console.clear();
     
             if (dopIngIndex > 0 && dopIngIndex <= podMenu.getSize()) {
                 String additionalIngredient = podMenu.getMenu().get(dopIngIndex - 1);
                 orderedPizza = PizzaFactory.createPizzaWithDopIng(
                         menu.getMenu().get(selectPiz - 1).getName(), additionalIngredient);
             } else if (dopIngIndex == podMenu.getSize() + 1) {
-                // Пользователь выбрал "Не надо"
                 orderedPizza = menu.getMenu().get(selectPiz - 1);
             } else {
                 throw new IllegalArgumentException("Неправильный выбор ингредиента!");
@@ -130,7 +128,6 @@ public class Main {
         } else {
             order.addPizza(orderedPizza);
         }
-    
         console.clear();
         System.out.println("Пицца добавлена в заказ!");
     }
@@ -201,11 +198,11 @@ public class Main {
             int choice = sc.nextInt();
     
             if (choice == 0) {
-                return; // Выход из удаления
+                return;
             }
     
             if (choice > 0 && choice <= pizzas.size()) {
-                pizzas.remove(choice - 1); // Удаляем выбранную пиццу
+                pizzas.remove(choice - 1);
                 console.clear();
                 System.out.println("Пицца успешно удалена из заказа!");
             } else {
