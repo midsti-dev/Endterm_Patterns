@@ -23,6 +23,8 @@ class Admin {
         return instance;
     }
     public static void adminMenu(Menu menu, MenuDopIng podMenu) throws InterruptedException{
+        System.out.println("Вход в меню админа...");
+        Thread.sleep(1500);
         Main.console.clear();
         boolean isExit = false;
         System.out.print("1.Добавить пиццу\n2.Удалить пиццу\n3.Добавить доп. ингридиент\n4.Удалить доп. ингридиент\n5.Выйти\nВыбор:");

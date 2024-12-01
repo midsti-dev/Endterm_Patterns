@@ -28,6 +28,12 @@ public class Main {
         }
         
     }
+
+
+    /**
+     *              Displays the customer menu and handles customer actions such as viewing the menu,
+     *                               ordering pizzas, and managing their current order.
+     */
     static void CustomerMenu(){
         console.clear();
         while(true){
@@ -57,13 +63,17 @@ public class Main {
             }
         }
     }
-    
+    /**
+     *                  Handles admin functionalities by authenticating and allowing management of the menu.
+     */
     static void AdminMenu() throws AdminAuthenticationException, InterruptedException{
         console.clear();
         Admin admin = Admin.getInstance();
         Admin.adminMenu(menu, podMenu);
     }
-
+    /**
+     *                                  Displays the list of pizzas in the menu.
+     */
     static void ShowMenuPizza(){
         console.clear();
         MenuIterator iterator = new PizzaMenuIterator(menu);
@@ -75,13 +85,18 @@ public class Main {
         }
         return;
     }
+    /**
+     *                      Displays the list of additional ingredients.
+     */
     static void ShowDopIngMenu(){
         int i = 1;
         for(String doping : podMenu.getMenu()){
             System.out.println(i++ + "." + doping);
         }
     }
-    
+    /**
+     *                 Allows the customer to order a pizza, with the option to add additional ingredients.
+     */
     static void OrderPizza() {
         console.clear();
         ShowMenuPizza();
@@ -131,13 +146,9 @@ public class Main {
         console.clear();
         System.out.println("Пицца добавлена в заказ!");
     }
-    
-    
-    
-    
-    
-    
-    
+    /**
+     *                                      Displays the current order.
+     */
     static void ShowOrder(){
         console.clear();
         if(order == null){
@@ -148,6 +159,11 @@ public class Main {
             order.showOrder();
         }
     }
+
+
+    /**
+     *                  Finalizes the order, allowing the customer to choose between pickup or delivery.
+     */
     static void FinishOrder(){
         console.clear();
         int select;
@@ -178,7 +194,9 @@ public class Main {
         console.clear();
         ShowOrder();
     }
-
+    /**
+     *                              Removes a selected pizza from the current order.
+     */
     static void DeleteFromOrder() {
         try {
             console.clear();

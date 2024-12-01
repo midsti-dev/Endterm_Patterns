@@ -1,13 +1,22 @@
+/**
+ *              Abstract class representing a generic Pizza.
+ *              Each pizza has a name and optional additional ingredients.
+ */
 abstract class Pizza {
     public abstract String getName();
     public abstract String getDopIng();
 }
+
+/**
+ *              Special class for pizzas created by the admin.
+ *              This class allows the admin to create a custom pizza with optional additional ingredients.
+ */
 class PizzaForAdmin extends Pizza{
     private static final String name = "Маргарита";
     private String DopIng;
 
     public PizzaForAdmin() {
-        this.DopIng = "";
+        this.DopIng = "Нет";
     }
 
     public PizzaForAdmin(String newDopIng) {
@@ -26,12 +35,15 @@ class PizzaForAdmin extends Pizza{
                 + " Доп. ингридиенты: " + this.getDopIng() + "\n";
     }
 }
+/**
+ * Concrete class representing others 
+ */
 class MargheritaPizza extends Pizza {
     private static final String name = "Маргарита";
     private String DopIng;
 
     public MargheritaPizza() {
-        this.DopIng = "";
+        this.DopIng = "Нет";
     }
 
     public MargheritaPizza(String newDopIng) {
@@ -56,7 +68,7 @@ class PepperoniPizza extends Pizza {
     private String DopIng;
 
     public PepperoniPizza() {
-        this.DopIng = "";
+        this.DopIng = "Нет";
     }
 
     public PepperoniPizza(String newDopIng) {
@@ -83,7 +95,7 @@ class FourSeasonsPizza extends Pizza {
     private String DopIng;
 
     public FourSeasonsPizza() {
-        this.DopIng = "";
+        this.DopIng = "Нет";
     }
 
     public FourSeasonsPizza(String newDopIng) {
@@ -110,7 +122,7 @@ class CaesarPizza extends Pizza {
     private String DopIng;
 
     public CaesarPizza() {
-        this.DopIng = "";
+        this.DopIng = "Нет";
     }
 
     public CaesarPizza(String newDopIng) {
@@ -136,7 +148,7 @@ class FourCheesePizza extends Pizza {
     private String DopIng;
 
     public FourCheesePizza() {
-        this.DopIng = "";
+        this.DopIng = "Нет";
     }
 
     public FourCheesePizza(String newDopIng) {
